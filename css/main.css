@@ -5,7 +5,8 @@
 }
 
 :root {
-  --index: calc(1vw + 1vh)
+  --index: calc(1vw + 1vh);
+  --transition: 1.5s cubic-bezier(.05, 0.5, 0, 1);
 }
 
 @font-face {
@@ -26,12 +27,13 @@ body {
 }
 
 .logo {
-  width: calc(var(--index) * 7.8);
-  height: calc(var(--index) * 7.8);
+  --logo-size: calc(var(--index) * 7.8);
+  width: var(--logo-size);
+  height: var(--logo-size);
   background-repeat: no-repeat;
   position: absolute;
-  left: 50%;
-  top: 10%;
+  left: calc(50% - calc(var(--logo-size) / 2));
+  top: calc(var(--index) * 2.8);
   z-index: 1;
 }
 
@@ -41,9 +43,12 @@ body {
 }
 
 .layers_container {
+  min-height: 500px;
   height: 100vh;
   transform-style: preserve-3d;
   transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+  will-change: transform;
+  transition: transform var(--transition);
 }
 
 .layers_item {
@@ -87,4 +92,43 @@ body {
   background-repeat: no-repeat;
 }
 
+.hero-content {
+  font-size: calc(var(--index) * 2.3);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: calc(var(--index) * -.15);
+  line-height: 1.35em;
+  margin-top: calc(var(--index) * 5.5);
+}
 
+.hero-content span {
+  display: block;
+}
+
+.hero-content p {
+  text-transform: none;
+  font-family: merriweather-italic-3d;
+  letter-spacing: normal;
+  font-size: calc(var(--index) * 1.1);
+  color: #fff;
+  line-height: 3;
+}
+
+.button_start {
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: 600;
+  text-transform: uppercase;
+  font-size: calc(var(--index) * .71);
+  letter-spacing: -.02vw;
+  padding: calc(var(--index) * .7) calc(var(--index) * 1.25);
+  background-color: transparent;
+  color: #fff;
+  border-radius: 10em;
+  border: rgb(255 255 255 / .4) 3px solid;
+  outline: none;
+  cursor: pointer;
+}
+
+.layer-4, .layer-5, .layer-6 {
+  pointer-events: none;
+}
